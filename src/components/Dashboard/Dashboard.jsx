@@ -1,5 +1,6 @@
-import Masonry from "react-masonry-css"; // Import react-masonry-css
+import Masonry from "react-masonry-css";
 import { createContext, useState } from "react";
+import { BACKEND_URL } from "../../config";
 import {
   ChevronLast,
   ChevronFirst,
@@ -9,15 +10,14 @@ import {
   LogOut,
   Save,
 } from "lucide-react";
-import { Link, Navigate } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SidebarItem from "./SidebarItem";
 import Dashboard1 from "./Dashboard1";
 import Card from "./Card";
 import { useContent } from "../../../Hooks/useContent";
+import axios, { isAxiosError } from "axios"; // Import axios and isAxiosError
 
 export const SidebarContext = createContext();
-
 
 export default function DashboardLayout() {
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ export default function DashboardLayout() {
   const { contents, refreshContent, isLoading, error } = useContent();
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [categoryDropdown, setCategoryDropdown] = useState(false);
+  const [shareLink, setShareLink] = useState(null);
 
   const filteredContents = selectedCategory
     ? contents.filter(
@@ -34,9 +35,48 @@ export default function DashboardLayout() {
     : contents;
 
   const masonryBreakpoints = {
-    default: 3, 
+    default: 3,
     1100: 2,
     700: 1,
+  };
+
+  const handleShare = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        navigate("/signin");
+        return;
+      }
+      const response = await axios.post(
+        `${BACKEND_URL}/api/v1/brain/share`,
+        { share: true },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setShareLink(response.data.message);
+      const fullShareLink = `${BACKEND_URL}${response.data.message}`;
+      alert(`Share this link: ${fullShareLink}`);
+    } catch (error) {
+      console.error("Error sharing:", error);
+      if (isAxiosError(error)) {
+        if (error.response) {
+          alert(
+            `Failed to create share link: ${
+              error.response.data.message || "Server error"
+            }`
+          );
+        } else if (error.request) {
+          alert("Failed to create share link: No response from server");
+        } else {
+          alert("Failed to create share link: Network error");
+        }
+      } else {
+        alert("Failed to create share link.");
+      }
+    }
   };
 
   return (
@@ -152,7 +192,10 @@ export default function DashboardLayout() {
                 </a>
               </nav>
 
-              <button className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
+              <button
+                className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
+                onClick={handleShare}
+              >
                 Share
               </button>
 
