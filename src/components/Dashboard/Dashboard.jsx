@@ -102,7 +102,14 @@ export default function DashboardLayout() {
                   </ul>
                 )}
               </div>
-              <SidebarItem icon={<Save />} text="Saved" />
+              <SidebarItem
+                icon={<Save />}
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.location.reload();
+                }}
+                text="Saved"
+              />
               <SidebarItem icon={<User />} text="Profile" />
               <SidebarItem
                 icon={<LogOut />}
