@@ -5,13 +5,12 @@ const getYouTubeEmbedUrl = (url) => {
     const urlObj = new URL(url);
     let videoId = urlObj.searchParams.get("v");
 
-    // Handle shortened YouTube URLs (e.g., youtu.be)
     if (!videoId && urlObj.hostname === "youtu.be") {
-      videoId = urlObj.pathname.substring(1); // Extract video ID from the pathname
+      videoId = urlObj.pathname.substring(1); 
     }
 
     const embedUrl = videoId ? `https://www.youtube.com/embed/${videoId}` : url;
-    console.log("Generated YouTube Embed URL:", embedUrl); // Debugging the embed URL
+    console.log("Generated YouTube Embed URL:", embedUrl);
     return embedUrl;
   } catch (error) {
     console.error("Error parsing YouTube URL:", url, error);
@@ -33,18 +32,15 @@ const loadScript = (src, id, callback) => {
 };
 
 export function Card({ title, link, type }) {
-  console.log("Card Props - Title:", title); // Debugging title
-  console.log("Card Props - Link:", link); // Debugging link
-  console.log("Card Props - Type:", type); // Debugging type
+  console.log("Card Props - Title:", title); 
+  console.log("Card Props - Link:", link); 
+  console.log("Card Props - Type:", type); 
 
-  // Normalize the type to lowercase
   const normalizedType = type?.toLowerCase();
 
-  // Format Twitter link if necessary
   const formattedTwitterLink =
     typeof link === "string" ? link.replace("x.com", "twitter.com") : "";
 
-  // Load Twitter, Instagram, and Facebook scripts
   useEffect(() => {
     if (normalizedType === "twitter") {
       console.log("Loading Twitter embed script...");
@@ -87,7 +83,7 @@ export function Card({ title, link, type }) {
 
   switch (normalizedType) {
     case "youtube":
-      console.log("Rendering YouTube content"); // Debugging YouTube case
+      console.log("Rendering YouTube content");
       content = (
         <iframe
           className="w-full h-fit"
@@ -103,8 +99,8 @@ export function Card({ title, link, type }) {
       );
       break;
     case "twitter":
-      console.log("Rendering Twitter content"); // Debugging Twitter case
-      console.log("Formatted Twitter Link:", formattedTwitterLink); // Debugging formatted link
+      console.log("Rendering Twitter content"); 
+      console.log("Formatted Twitter Link:", formattedTwitterLink); 
       content = (
         <blockquote className="twitter-tweet">
           <a href={formattedTwitterLink}>{formattedTwitterLink}</a>
@@ -112,13 +108,13 @@ export function Card({ title, link, type }) {
       );
       break;
     case "facebook":
-      console.log("Rendering Facebook content"); // Debugging Facebook case
+      console.log("Rendering Facebook content");
       content = (
         <div className="fb-post" data-href={link} data-width="500"></div>
       );
       break;
     case "instagram":
-      console.log("Rendering Instagram content"); // Debugging Instagram case
+      console.log("Rendering Instagram content"); 
       content = (
         <blockquote
           className="instagram-media"
@@ -128,21 +124,22 @@ export function Card({ title, link, type }) {
       );
       break;
     default:
-      console.log("Unsupported content type:", normalizedType); // Debugging default case
+      console.log("Unsupported content type:", normalizedType); 
       content = <p>Unsupported content type.</p>;
   }
 
   return (
-    <div className="bg-white font-light border rounded-md shadow-md border-gray-200 break-inside-avoid">
+    <div className="bg-white font-light border rounded-md w-[100%] shadow-md border-gray-200 break-inside-avoid h-fit ">
       <div className="p-2 flex justify-between items-center">
-        <div>{title}</div>
+        <br />
+        <div className="font-bold">{title.charAt(0).toUpperCase(0)+title.slice(1)}</div>
         <div>
           <a href={link} target="_blank" rel="noopener noreferrer">
             🔗
           </a>
         </div>
       </div>
-      <div className="p-2">{content}</div>
+      <div className="p-2 content">{content}</div>
     </div>
   );
 }

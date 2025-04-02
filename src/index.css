@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+.masonry-grid {
+  display: flex;
+  margin-left: -16px; /* Adjust for gutter */
+  width: auto;
+}
+
+.masonry-grid-column {
+  padding-left: 16px; /* Adjust for gutter */
+  background-clip: padding-box;
+}
+
+.masonry-grid-column > div {
+  margin-bottom: 16px; /* Space between items */
+}
