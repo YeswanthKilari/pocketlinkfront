@@ -32,9 +32,7 @@ const loadScript = (src, id, callback) => {
 };
 
 export function Card({ title, link, type }) {
-  console.log("Card Props - Title:", title); 
-  console.log("Card Props - Link:", link); 
-  console.log("Card Props - Type:", type); 
+ 
 
   const normalizedType = type?.toLowerCase();
 

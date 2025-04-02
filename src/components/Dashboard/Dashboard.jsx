@@ -9,8 +9,8 @@ import {
   LogOut,
   Save,
 } from "lucide-react";
-import { Link } from "react-router-dom";
-
+import { Link, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SidebarItem from "./SidebarItem";
 import Dashboard1 from "./Dashboard1";
 import Card from "./Card";
@@ -18,7 +18,9 @@ import { useContent } from "../../../Hooks/useContent";
 
 export const SidebarContext = createContext();
 
+
 export default function DashboardLayout() {
+  const navigate = useNavigate();
   const [expanded, setExpanded] = useState(true);
   const [showCollections, setShowCollections] = useState(false);
   const { contents, refreshContent, isLoading, error } = useContent();
@@ -31,11 +33,10 @@ export default function DashboardLayout() {
       )
     : contents;
 
-  // Masonry breakpoint configuration
   const masonryBreakpoints = {
-    default: 3, // Default to 3 columns
-    1100: 2, // 2 columns for screens smaller than 1100px
-    700: 1, // 1 column for screens smaller than 700px
+    default: 3, 
+    1100: 2,
+    700: 1,
   };
 
   return (
@@ -103,12 +104,19 @@ export default function DashboardLayout() {
               </div>
               <SidebarItem icon={<Save />} text="Saved" />
               <SidebarItem icon={<User />} text="Profile" />
-              <SidebarItem icon={<LogOut />} text="Logout" />
+              <SidebarItem
+                icon={<LogOut />}
+                onClick={() => {
+                  console.log("User logged out");
+                  localStorage.removeItem("token");
+                  navigate("/signin");
+                }}
+                text="Logout"
+              />
             </ul>
           </nav>
         </aside>
 
-        {/* Main Content */}
         <div
           className={`flex flex-col flex-1 transition-all duration-300 ${
             expanded ? "ml-60" : "ml-16"
@@ -166,10 +174,17 @@ export default function DashboardLayout() {
               style={{ borderTopWidth: "0.1px" }}
             />
 
-            {/* Masonry Layout */}
-            <div className="mt-4">
+            <div className="mt-4 object-contain">
               {isLoading ? (
-                <p className="text-white">Loading content...</p>
+                <p className="text-white">
+                  <center>
+                    <img
+                      className="w-[150px] "
+                      src="../../../public/ripples.svg"
+                      alt=""
+                    />
+                  </center>
+                </p>
               ) : error ? (
                 <p className="text-red-500">Error: {error}</p>
               ) : filteredContents?.length > 0 ? (

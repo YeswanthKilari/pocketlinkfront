@@ -9,17 +9,23 @@ export function useContent() {
 
   const refreshContent = async () => {
     try {
+      setIsLoading(true);
       const response = await axios.get(`${BACKEND_URL}/api/v1/content`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      setContents(response.data.content);
-      setIsLoading(false);
+
+      setTimeout(() => {
+        setContents(response.data.content);
+        setIsLoading(false);
+      }, 2000);
     } catch (error) {
       console.error("Error fetching content:", error);
-      setError("Failed to load content");
-      setIsLoading(false);
+      setTimeout(() => {
+        setError("Failed to load content");
+        setIsLoading(false);
+      }, 2000);
     }
   };
 
