@@ -1,5 +1,81 @@
 @import "tailwindcss";
 
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Coming+Soon&display=swap');
+
+/* Define font classes equivalent to Tailwind config */
+.font-comic-sans {
+  font-family: "Comic Sans MS", cursive;
+}
+
+.font-bubble-gum {
+  font-family: "Bubblegum Sans", cursive;
+}
+
+.font-hand-drawn {
+  font-family: "Coming Soon", cursive;
+}
+
+/* --- */
+
+/* Global and Example Usage */
+body {
+  /* This is an example of a normal, neutral color */
+  background-color: #f3f4f6; /* A light gray */
+  color: #1f2937; /* A dark gray for text */
+  font-family: "Comic Sans MS", cursive; /* default font */
+}
+
+/* Example: Add these to your global CSS for the animations */
+@keyframes floatBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes floatBobAlt {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+@keyframes spinSlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeInMoveUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInRight {
+  0% { opacity: 0; transform: translateX(20px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.animate-float-bob {
+  animation: floatBob 3s ease-in-out infinite;
+}
+
+.animate-float-bob-alt {
+  animation: floatBobAlt 3.5s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 15s linear infinite;
+}
+
+.animate-fade-in-up {
+  animation: fadeInMoveUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in-right {
+  animation: fadeInRight 0.8s ease-out forwards;
+}
+
+/* Example font family utility */
+.font-sans {
+  font-family: 'Inter', sans-serif; /* You can replace this with any normal sans-serif font */
+}
 
 .masonry-grid {
   display: flex;

@@ -1,78 +1,55 @@
 import React from "react";
+import { BsFillCollectionFill } from "react-icons/bs";
+import { FaBook, FaVideo, FaFilePdf } from "react-icons/fa";
+import { motion } from "framer-motion";
 import Navbar from "../Navbar/Navbar";
-import Banner from "../../assets/banner.png";
-import { animate, motion } from "framer-motion";
-
-export const FadeUp = (delay) => {
-  return {
-    initial: {
-      opacity: 0,
-      y: 50,
-    },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        duration: 0.5,
-        delay: delay,
-        ease: "easeInOut",
-      },
-    },
-  };
-};
 
 const Hero = () => {
   return (
-    
-    <section className="bg-white  overflow-hidden relative">
+    <section className="relative bg-gradient-to-r from-indigo-600 via-purple-700 to-pink-600 min-h-screen overflow-hidden">
       <Navbar />
-      <div className="container grid grid-cols-1 md:grid-cols-2 min-h-[700px] bg-[#f5f3eb] ">
-        {/* Brand Info */}
-        <div className="ml-40 flex flex-col justify-center py-14 md:py-0 relative z-20">
-  <div className="text-center md:text-left space-y-10 lg:max-w-[400px]">
-    <motion.h1
-      variants={FadeUp(0.6)}
-      initial="initial"
-      animate="animate"
-      className="text-3xl lg:text-5xl font-bold !leading-snug"
-    >
-      All Your <span className=" text-violet-500">Learning Resources</span> in One Place.
-      {/* <p className="text-base font-normal">
-  Save, organize, and share your favorite videos, posts, PDFs, and notes effortlessly. No more searching across multiple platforms.
-</p>
-<p className="font-bold text-base">
-  Everything is accessible in one click!
-</p> */}
 
-            </motion.h1>
+      {/* Floating decorative circles */}
+      <div className="absolute top-10 left-10 w-40 h-40 bg-white opacity-10 rounded-full animate-pulse"></div>
+      <div className="absolute bottom-20 right-10 w-60 h-60 bg-white opacity-10 rounded-full animate-pulse"></div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        className="container mx-auto px-6 flex flex-col justify-center items-center text-center md:max-w-2xl py-32 relative z-20"
+      >
+        <h1 className="text-white text-4xl md:text-5xl font-extrabold leading-tight mb-6 drop-shadow-lg">
+          All Your Learning Resources in One Place
+        </h1>
+        <p className="text-indigo-200 text-lg md:text-xl mb-8 drop-shadow-md">
+          Stop searching. Start organizing. Keep all your favorite videos,
+          posts, PDFs, and notes at your fingertips.
+        </p>
+
+        {/* CTA Button */}
+        <a
+          href="#"
+          className="inline-flex items-center gap-3 bg-amber-400 text-black font-semibold px-8 py-4 rounded-lg shadow-lg hover:bg-amber-500 transition duration-200 ease-in-out mb-12"
+        >
+          <span>Start Organizing</span>
+          <BsFillCollectionFill className="text-2xl group-hover:animate-bounce transition duration-200" />
+        </a>
+
+        {/* Animated icons showing resource types */}
+        <div className="flex gap-8 justify-center items-center mt-4">
+          {[FaBook, FaVideo, FaFilePdf].map((Icon, idx) => (
             <motion.div
-              variants={FadeUp(0.8)}
-              initial="initial"
-              animate="animate"
-              className="flex justify-center md:justify-start"
+              key={idx}
+              className="text-white text-4xl md:text-5xl"
+              animate={{ y: [0, -10, 0] }}
+              transition={{ repeat: Infinity, duration: 2 + idx * 0.5 }}
             >
-              <button className="primary-btn bg-amber-500 rounded-lg px-6 py-3 text-white font-bold text-xl w-full sm:w-auto transition-all duration-300 hover:scale-105 hover:shadow-md">
-  Start Organizing
-</button>
-
+              <Icon />
             </motion.div>
-          </div>
+          ))}
         </div>
-        {/* Hero Image */}
-        <div className="flex justify-center items-center mr-25">
-          <motion.img
-            initial={{ x: 50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4, ease: "easeInOut" }}
-            src={Banner}
-            alt=""
-            className="w-[400px] xl:w-[550px] relative z-10 drop-shadow"
-          />
-          
-        </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

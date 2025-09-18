@@ -1,0 +1,8 @@
+1. Remove my_collections for the nav_bar 🟢
+2. Add the profile sections with name and avathar 🔴
+3. Add the road_map Ai video generator 🟢
+4. (optional) Share button 🟢
+5. Add the Tags and seach in the nav_bar 🟢
+6. Remove the facebook section and Add the linkedin Section 🟢
+7. Make it responsive.. 🔴
+8. Content summarization and Tag generation 🔴
