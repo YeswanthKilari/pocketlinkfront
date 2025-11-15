@@ -7,7 +7,6 @@ const Banner = () => {
   return (
     <section className="bg-white py-14 md:py-24">
       <div className="container mx-auto px-6 max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        {/* Text Content */}
         <div className="flex flex-col justify-center text-center md:text-left space-y-12">
           <h1 className="text-3xl md:text-4xl font-extrabold leading-snug text-gray-900">
             Organize and Access Your Resources with Ease!
@@ -46,10 +45,9 @@ const Banner = () => {
           </div>
         </div>
 
-        {/* Illustration Placeholder */}
         <div className="flex justify-center md:justify-end">
           <div className="w-72 h-72 bg-indigo-100 rounded-xl shadow-lg flex items-center justify-center text-indigo-400 text-6xl font-bold select-none">
-            {/* You can replace this with an SVG or illustration */}
+           
             📚
           </div>
         </div>

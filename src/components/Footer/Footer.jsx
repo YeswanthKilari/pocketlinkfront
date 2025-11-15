@@ -89,7 +89,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="text-center pt-8 text-gray-500 text-sm">
-          &copy; {new Date().getFullYear()} Pocketlink. All rights reserved.
+          &copy; {new Date().getFullYear()} Pocketlink by yeswanthkilari
         </div>
       </motion.div>
     </footer>
