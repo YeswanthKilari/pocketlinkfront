@@ -1,12 +1,69 @@
-# React + Vite
+# PocketLink
+<img width="1888" height="920" alt="image" src="https://github.com/user-attachments/assets/76f37312-81be-4aea-b0cb-178ec65466a1" />
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+PocketLink is a modern web app to save, organize, and share your favorite learning resources in custom categories.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Save links to videos, articles, social posts, and more
+- Organize resources by custom categories
+- Share collections with others via unique links
+- Responsive and user-friendly interface
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/pocketlinkfront.git
+cd pocketlinkfront
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure Environment
+
+Create a `.env` file in the root directory and add your API URL or other environment variables as needed:
+
+```
+VITE_API_URL=https://your-backend-api.com
+```
+
+### 4. Run the Development Server
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser to view the app.
+
+### 5. Build for Production
+
+```bash
+npm run build
+```
+
+The production-ready files will be in the `dist` directory.
+
+### 6. Deploy to Vercel
+
+- Push your code to GitHub.
+- Connect your repository to [Vercel](https://vercel.com/).
+- Ensure your `vercel.json` is configured with `"distDir": "dist"`.
+
+## Project Structure
+
+```
+src/
+  components/    # React components
+  App.jsx        # Main app file
+  main.jsx       # Entry point
+  config.jsx     # API config
+public/
+vercel.json      # Vercel deployment config
+```
+
